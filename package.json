@@ -18,6 +18,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "discord.js": "^14.20.0"
+    "discord.js": "^14.20.0",
+    "dotenv": "^16.5.0"
   }
 }
