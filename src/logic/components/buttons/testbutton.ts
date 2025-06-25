@@ -1,4 +1,3 @@
-import { BaseInteraction, ButtonInteraction } from "discord.js";
 import SuperClient from "../../../super_classes/SuperClient";
 import SuperComponent from "../../../super_classes/SuperComponent";
 import { ComponentInteraction } from "../../../interfaces/ISuperComponent";

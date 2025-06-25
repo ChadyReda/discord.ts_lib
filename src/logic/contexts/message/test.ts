@@ -10,7 +10,7 @@ export default new SuperContext(
         userPermissions: [],
         cooldown: 0,
         developerOnly: false,
-        nsfw: false,
+        nsfw: true,
         run: async (client: SuperClient, interaction: ContextMenuCommandInteraction) => {
             await interaction.reply('hheee message cannot be deleted')
         }        

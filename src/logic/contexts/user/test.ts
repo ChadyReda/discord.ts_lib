@@ -7,8 +7,8 @@ export default new SuperContext(
         command: new ContextMenuCommandBuilder()
         .setName('ban'),
         botPermissions: [],
-        userPermissions: [],
-        cooldown: 0,
+        userPermissions: ["Administrator"],
+        cooldown: 10000,
         developerOnly: false,
         nsfw: false,
         run: async (client: SuperClient, interaction: ContextMenuCommandInteraction) => {

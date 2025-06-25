@@ -1,4 +1,5 @@
 import SuperClient from "../../../super_classes/SuperClient";
+import { SuperMessageCommand } from "../../../super_classes/SuperCommand";
 import { SuperEvent } from "../../../super_classes/SuperEvent";
 import { ChannelType, Message } from "discord.js";
 
@@ -10,16 +11,21 @@ export default new SuperEvent({
 
         if (message.author.bot || !message.guild) return // message from a bot or not from a guild
         
-        if (!(message.content.startsWith(client.registry.prefix))) return // message doesn't start with the bot prefix
-        
         const args = message.content.slice(client.registry.prefix.length).trim().split(/ +/); // remove the bot prefix and split the message into an array of arguments
         
         const command_label = args.shift()?.toLowerCase();
         
         if (!command_label) return 
-        
-        const command = client.registry.prefix_commands.get(command_label)
-        || client.registry.prefix_commands.get(client.registry.prefix_aliases.get(command_label)!)
+
+        let command: SuperMessageCommand;
+
+        if (message.content.startsWith(client.registry.prefix)) {
+            command = client.registry.prefix_commands.get(command_label)!
+            || client.registry.prefix_commands.get(client.registry.prefix_aliases.get(command_label)!)
+        } else {
+            command = client.registry.non_prefix_commands.get(command_label)!
+            || client.registry.non_prefix_commands.get(client.registry.non_prefix_aliases.get(command_label)!)
+        }
         
         if (!command) return
 

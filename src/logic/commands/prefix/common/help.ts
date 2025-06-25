@@ -1,6 +1,7 @@
-import { Message } from "discord.js";
+import { ActionRowBuilder, Message, ButtonBuilder, ButtonStyle } from "discord.js";
 import SuperClient from "../../../../super_classes/SuperClient";
 import { SuperMessageCommand } from "../../../../super_classes/SuperCommand";
+
 
 export default new SuperMessageCommand({
     name: 'help',
@@ -11,6 +12,10 @@ export default new SuperMessageCommand({
     developerOnly: false,
     cooldown: 0,
     run: async (client: SuperClient, message: Message, args: any) => {
-        await message.reply('ill help you right away! args: ' + args)
+        await message.reply({content: 'what do you want', components: [
+            new ActionRowBuilder<ButtonBuilder>().addComponents(
+                new ButtonBuilder().setCustomId('testbutton').setLabel('test').setStyle(ButtonStyle.Danger),
+            ),
+        ]})
     }
 })
