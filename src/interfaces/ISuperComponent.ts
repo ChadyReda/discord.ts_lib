@@ -1,4 +1,4 @@
-import { Interaction, PermissionsString } from "discord.js";
+import { AnySelectMenuInteraction, ButtonInteraction, ModalSubmitInteraction, PermissionsString } from "discord.js";
 import SuperClient from "../super_classes/SuperClient";
 
 interface ISuperComponent {
@@ -11,10 +11,17 @@ interface ISuperComponent {
     run: RunFunc
 }
 
-type RunFunc = (client: SuperClient, interaction: Interaction) => Promise<void>
+type ComponentInteraction =
+  | ButtonInteraction
+  | AnySelectMenuInteraction
+  | ModalSubmitInteraction;
+
+
+type RunFunc = (client: SuperClient, interaction: ComponentInteraction) => Promise<any> | any
 
 
 export {
     ISuperComponent,
-    RunFunc
+    RunFunc,
+    ComponentInteraction
 }

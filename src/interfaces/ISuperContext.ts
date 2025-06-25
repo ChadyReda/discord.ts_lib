@@ -1,7 +1,7 @@
 import { ContextMenuCommandBuilder, ContextMenuCommandInteraction, PermissionsString } from "discord.js";
 import SuperClient from "../super_classes/SuperClient";
 
-type RunFunc = (client: SuperClient, interaction: ContextMenuCommandInteraction) => Promise<void>
+type RunFunc = (client: SuperClient, interaction: ContextMenuCommandInteraction) => Promise<any> | any
 
 interface ISuperContext {
     command: ContextMenuCommandBuilder,

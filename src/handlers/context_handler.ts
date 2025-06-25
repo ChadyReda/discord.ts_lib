@@ -11,10 +11,14 @@ export default async function (client: SuperClient) {
             const context = module.default;
             if (!(context instanceof SuperContext)) continue;
             if (type == 'message') {
-                console.log(`Loaded context: ${context.settings.command.name}}`);
+                console.log(`Loaded context: ${context.settings.command.name}`);
+                context.settings.command.setType(3);
+                client.commandsToRegister.push(context.settings.command)
                 client.registry.registerMessageContext(context.settings.command.name, context)
             } else if (type == 'user') {
-                console.log(`Loaded context: ${context.settings.command.name}}`);
+                console.log(`Loaded context: ${context.settings.command.name}`);
+                context.settings.command.setType(2);
+                client.commandsToRegister.push(context.settings.command)
                 client.registry.registerUserContext(context.settings.command.name, context)
             }
         }

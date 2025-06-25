@@ -1,12 +1,13 @@
-import { Interaction, Message, TextChannel, PermissionsString, SlashCommandBuilder } from "discord.js";
+import { Message, TextChannel, PermissionsString, SlashCommandBuilder, ChatInputCommandInteraction } from "discord.js";
 import SuperClient from "../super_classes/SuperClient";
 
-type RunSlashFunc = (client: SuperClient, interaction: Interaction) => Promise<void>;
-type RunMessageFunc = (client: SuperClient, message: Message & {channel: TextChannel}, args: any[]) => Promise<void>;
+type RunSlashFunc = (client: SuperClient, interaction: ChatInputCommandInteraction) => Promise<void> | any;
+type RunMessageFunc = (client: SuperClient, message: Message & {channel: TextChannel}, args: any[]) => Promise<void> | any;
 
 interface ISuperSlashCommand {
     command: SlashCommandBuilder,
     botPermissions: PermissionsString[],
+    userPermissions: PermissionsString[],
     developerOnly: boolean,
     cooldown: number,
     run: RunSlashFunc

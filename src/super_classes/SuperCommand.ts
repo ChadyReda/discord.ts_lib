@@ -10,6 +10,9 @@ export class SuperSlashCommand extends SlashCommandBuilder {
     setBotPermissions (botPermissions: PermissionsString[]) {
         this.settings.botPermissions = botPermissions
     }
+    setUserPermissions (userPermissions: PermissionsString[]) {
+        this.settings.userPermissions = userPermissions
+    }
     setDeveloperOnly (developerOnly: boolean) {
         this.settings.developerOnly = developerOnly
     }
@@ -19,6 +22,7 @@ export class SuperSlashCommand extends SlashCommandBuilder {
     setRun (run: RunSlashFunc) {
         this.settings.run = run
     }
+    
 }
 
 export class SuperMessageCommand {

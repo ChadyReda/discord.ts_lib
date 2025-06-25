@@ -17,7 +17,7 @@ export default class Registry {
         selects: new Map<string, SuperComponent>(),
         modals: new Map<string, SuperComponent>()
     }
-    cooldows = new Map<string, any>()
+    cooldowns = new Map<string, any>()
     registerSlash(name: string, command: SuperSlashCommand){
         this.slash_commands.set(name, command)
     }
