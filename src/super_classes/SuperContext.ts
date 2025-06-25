@@ -13,6 +13,9 @@ export default class SuperContext extends ContextMenuCommandBuilder {
     setBotPermissions(botPermissions: PermissionsString[]) {
         this.settings.botPermissions = botPermissions
     }
+    setUserPermissions(userPermissions: PermissionsString[]) {
+        this.settings.userPermissions = userPermissions
+    }
     setDeveloperOnly(developerOnly: boolean) {
         this.settings.developerOnly = developerOnly
     }

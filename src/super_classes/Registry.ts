@@ -3,6 +3,7 @@ import SuperComponent from "./SuperComponent"
 import SuperContext from "./SuperContext"
 
 export default class Registry {
+    prefix: string = '!';
     slash_commands = new Map<string, SuperSlashCommand>()
     prefix_commands = new Map<string, SuperMessageCommand>()
     prefix_aliases = new Map<string, string>()

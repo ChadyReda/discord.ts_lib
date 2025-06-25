@@ -5,12 +5,14 @@ import { ContextMenuCommandBuilder, ContextMenuCommandInteraction } from "discor
 export default new SuperContext(
     {
         command: new ContextMenuCommandBuilder()
-        .setName('fiusco'),
+        .setName('ban'),
         botPermissions: [],
+        userPermissions: [],
+        cooldown: 0,
         developerOnly: false,
         nsfw: false,
         run: async (client: SuperClient, interaction: ContextMenuCommandInteraction) => {
-            await interaction.reply('firstContext')
+            await interaction.reply('no no no chill')
         }        
     }
 )

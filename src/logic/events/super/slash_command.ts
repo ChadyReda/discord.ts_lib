@@ -25,17 +25,19 @@ export default new SuperEvent(
 
             // check for the cooldown
             if (command.settings.cooldown > 0) {
-                // the cooldown key
                 const key = `s${interaction.user.id}${interaction.commandName}`
-                // if the user not under cooldown
-                if (!client.registry.cooldowns.has(key)) {
-                    client.registry.cooldowns.set(key, 0);
-                    setTimeout(() => client.registry.cooldowns.delete(key), command.settings.cooldown);
-                    // if the user is under cooldown
-                } else {
-                    interaction.reply(`please wait \`${command.settings.cooldown / 1000}\` seconds before using this command again.`);
-                    return
+                const now = Date.now()
+                const expiration_time = client.registry.cooldowns.get(key)
+                if (expiration_time && now < expiration_time) {
+                    const remaining = ((expiration_time - now) / 1000).toFixed(1);
+                    if (interaction.isRepliable()) {
+                        interaction.reply(`please wait ${remaining} seconds before using this command again.`);
+                        return
+                    }
                 }
+
+                client.registry.cooldowns.set(key, now + command.settings.cooldown)
+                setTimeout(() => client.registry.cooldowns.delete(key), command.settings.cooldown)
             }
 
             // check the bot perms

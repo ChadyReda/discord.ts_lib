@@ -5,8 +5,10 @@ type RunFunc = (client: SuperClient, interaction: ContextMenuCommandInteraction)
 
 interface ISuperContext {
     command: ContextMenuCommandBuilder,
+    userPermissions: PermissionsString[],
     botPermissions: PermissionsString[],
     developerOnly: boolean,
+    cooldown: number,
     nsfw: boolean,
     run: RunFunc
 }

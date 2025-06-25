@@ -15,7 +15,8 @@ export default class SuperClient extends Client {
         super({
             intents: [
                 IntentsBitField.Flags.Guilds,
-                IntentsBitField.Flags.GuildMessages
+                IntentsBitField.Flags.GuildMessages,
+                IntentsBitField.Flags.MessageContent
                 // add more if needed
             ],
             partials: [

@@ -18,6 +18,7 @@ interface ISuperMessageCommand {
     userPermissions: PermissionsString[],
     botPermissions: PermissionsString[],
     aliases: string[],
+    nsfw: boolean
     developerOnly: boolean,
     cooldown: number,
     run: RunMessageFunc

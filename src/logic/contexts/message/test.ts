@@ -5,12 +5,14 @@ import { ContextMenuCommandBuilder, ContextMenuCommandInteraction } from "discor
 export default new SuperContext(
     {
         command: new ContextMenuCommandBuilder()
-        .setName('fimessco'),
+        .setName('delete'),
         botPermissions: [],
+        userPermissions: [],
+        cooldown: 0,
         developerOnly: false,
         nsfw: false,
         run: async (client: SuperClient, interaction: ContextMenuCommandInteraction) => {
-            await interaction.reply('hheee message context')
+            await interaction.reply('hheee message cannot be deleted')
         }        
     }
 )

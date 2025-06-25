@@ -48,6 +48,9 @@ export class SuperMessageCommand {
     setCooldown (cooldown: number) {
         this.settings.cooldown = cooldown
     }
+    setNsfw (nsfw: boolean) {
+        this.settings.nsfw = nsfw
+    }
     setRun (run: RunMessageFunc) {
         this.settings.run = run
     }
