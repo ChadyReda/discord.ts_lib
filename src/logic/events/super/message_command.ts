@@ -29,7 +29,7 @@ export default new SuperEvent({
         
         if (!command) return
 
-        if (command.settings.cooldown > 0) {
+        if (command.settings.cooldown! > 0) {
             const key = `p${message.author.id}${command_label}`
             const now = Date.now()
             const expiration_time = client.registry.cooldowns.get(key)
@@ -38,18 +38,18 @@ export default new SuperEvent({
                 message.reply(`please wait ${remaining} seconds before using this command again.`)
                 return
             }
-            client.registry.cooldowns.set(key, now + command.settings.cooldown)
+            client.registry.cooldowns.set(key, now + command.settings.cooldown!)
             setTimeout(() => client.registry.cooldowns.delete(key), command.settings.cooldown)
         }
 
-        for (const per of command.settings.botPermissions) {
+        for (const per of command.settings.botPermissions!) {
             if (!message.guild.members.me?.permissions.has(per)) {
                 message.reply(`i need the \`${per}\` permission to execute this command.`);
                 return
             }
         }
 
-        for (const per of command.settings.userPermissions) {
+        for (const per of command.settings.userPermissions!) {
             if (!message.member?.permissions.has(per)) {
                 message.reply(`you need the \`${per}\` permission to execute this command.`);
                 return

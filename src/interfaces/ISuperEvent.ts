@@ -5,7 +5,7 @@ type RunFunc = (client: SuperClient, ...args: any[]) => Promise<void> | any;
 
 interface ISuperEvent {
     event: keyof ClientEvents;
-    once: boolean;
+    once?: boolean;
     run: RunFunc
 }
 

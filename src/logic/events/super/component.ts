@@ -32,7 +32,7 @@ export default new SuperEvent({
         if (!component) return
 
 
-        if (component.settings.cooldown > 0) {
+        if (component.settings.cooldown! > 0) {
             const key = `${type}${interaction.user.id}${component.settings.id}`
             const now = Date.now()
             const expiration_time = client.registry.cooldowns.get(key)
@@ -43,12 +43,12 @@ export default new SuperEvent({
                 }
                 return
             }
-            client.registry.cooldowns.set(key, now + component.settings.cooldown)
+            client.registry.cooldowns.set(key, now + component.settings.cooldown!)
             setTimeout(() => client.registry.cooldowns.delete(key), component.settings.cooldown)
         }
 
 
-        for (const per of component.settings.botPermissions) {
+        for (const per of component.settings.botPermissions!) {
             if (!interaction.guild.members.me?.permissions.has(per)) {
                 if (interaction.isRepliable()) {
                     interaction.reply('you do not have the required permissions to use this component.')
@@ -57,7 +57,7 @@ export default new SuperEvent({
             }
         }
 
-        for (const per of component.settings.userPermissions) {
+        for (const per of component.settings.userPermissions!) {
             if (!(interaction.member?.permissions as PermissionsBitField).has(per)) {
                 if (interaction.isRepliable()) {
                     interaction.reply('you do not have the required permissions to use this component.')

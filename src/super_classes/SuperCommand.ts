@@ -1,57 +1,117 @@
 import { SlashCommandBuilder, PermissionsString } from "discord.js";
-import { ISuperSlashCommand, ISuperMessageCommand, RunSlashFunc, RunMessageFunc } from "../interfaces/ISuperCommand";
+import { ISuperSlashCommand, ISuperMessageCommand, RunSlashFunc, RunMessageFunc, OnSFailType, OnMFailType, SMiddlwaresType, MMiddlwaresType } from "../interfaces/ISuperCommand";
+
+const default_slashcommand_settings: Partial<ISuperSlashCommand> = {
+    botPermissions: [],
+    userPermissions: [],
+    middlwares: [],
+    developerOnly: false,
+    cooldown: 0,
+    onBotPermissionsFail: () => { },
+    onUserPermissionsFail: () => { },
+    onDeveloperOnlyFail: () => { },
+    onCooldownFail: () => { }
+}
+
+const default_messagecommand_settings: Partial<ISuperMessageCommand> = {
+    userPermissions: [],
+    botPermissions: [],
+    aliases: [],
+    middlwares: [],
+    nsfw: false,
+    developerOnly: false,
+    cooldown: 0,
+    onBotPermissionsFail: () => { },
+    onUserPermissionsFail: () => { },
+    onDeveloperOnlyFail: () => { },
+    onCooldownFail: () => { },
+    onNsfwFail: () => { }, 
+}
+
 
 export class SuperSlashCommand extends SlashCommandBuilder {
     settings: ISuperSlashCommand
-    constructor (options: ISuperSlashCommand) {
+    constructor(options: ISuperSlashCommand) {
         super();
-        this.settings = options
+        this.settings = { ...default_slashcommand_settings, ...options }
     }
-    setBotPermissions (botPermissions: PermissionsString[]) {
+    setBotPermissions(botPermissions: PermissionsString[]) {
         this.settings.botPermissions = botPermissions
     }
-    setUserPermissions (userPermissions: PermissionsString[]) {
+    setUserPermissions(userPermissions: PermissionsString[]) {
         this.settings.userPermissions = userPermissions
     }
-    setDeveloperOnly (developerOnly: boolean) {
+    setDeveloperOnly(developerOnly: boolean) {
         this.settings.developerOnly = developerOnly
     }
-    setCooldown (cooldown: number) {
+    setOnUserPermissionsFail(onUserPermissionsFail: OnSFailType) {
+        this.settings.onBotPermissionsFail = onUserPermissionsFail
+    }
+    setOnBotPermissionsFail(onBotPermissionsFail: OnSFailType) {
+        this.settings.onBotPermissionsFail = onBotPermissionsFail
+    }
+    setOnDeveloperOnlyFail(onDeveloperOnlyFail: OnSFailType) {
+        this.settings.onDeveloperOnlyFail = onDeveloperOnlyFail
+    }
+    setOnCooldownFail(onCooldownFail: OnSFailType) {
+        this.settings.onCooldownFail = onCooldownFail
+    }
+    setMiddlwares(middlwares: SMiddlwaresType[]) {
+        this.settings.middlwares = middlwares
+    }
+    setCooldown(cooldown: number) {
         this.settings.cooldown = cooldown
     }
-    setRun (run: RunSlashFunc) {
+    setRun(run: RunSlashFunc) {
         this.settings.run = run
     }
-    
 }
 
 export class SuperMessageCommand {
     settings: ISuperMessageCommand
-    constructor (options: ISuperMessageCommand) {
-        this.settings = options
+    constructor(options: ISuperMessageCommand) {
+        this.settings = { ...default_messagecommand_settings, ...options}
     }
-    setName (name: string) {
+    setName(name: string) {
         this.settings.name = name
     }
-    setUserPermissions (userPermissions: PermissionsString[]) {
+    setUserPermissions(userPermissions: PermissionsString[]) {
         this.settings.userPermissions = userPermissions
     }
-    setBotPermissions (botPermissions: PermissionsString[]) {
+    setBotPermissions(botPermissions: PermissionsString[]) {
         this.settings.botPermissions = botPermissions
     }
-    setAliases (aliases: string[]) {
+    setAliases(aliases: string[]) {
         this.settings.aliases = aliases
     }
-    setDeveloperOnly (developerOnly: boolean) {
+    setDeveloperOnly(developerOnly: boolean) {
         this.settings.developerOnly = developerOnly
     }
-    setCooldown (cooldown: number) {
+    setCooldown(cooldown: number) {
         this.settings.cooldown = cooldown
     }
-    setNsfw (nsfw: boolean) {
+    setNsfw(nsfw: boolean) {
         this.settings.nsfw = nsfw
     }
-    setRun (run: RunMessageFunc) {
+    setOnUserPermissionsFail(onUserPermissionsFail: OnMFailType) {
+        this.settings.onUserPermissionsFail = onUserPermissionsFail
+    }
+    setOnBotPermissionsFail(onBotPermissionsFail: OnMFailType) {
+        this.settings.onBotPermissionsFail = onBotPermissionsFail
+    }
+    setOnDeveloperOnlyFail(onDeveloperOnlyFail: OnMFailType) {
+        this.settings.onDeveloperOnlyFail = onDeveloperOnlyFail
+    }
+    setOnCooldownFail(onCooldownFail: OnMFailType) {
+        this.settings.onCooldownFail = onCooldownFail
+    }
+    setOnNsfwFail(onNsfwFail: OnMFailType) {
+        this.settings.onNsfwFail = onNsfwFail
+    }
+    setMiddlwares(middlwares: MMiddlwaresType[]) {
+        this.settings.middlwares = middlwares
+    }
+    setRun(run: RunMessageFunc) {
         this.settings.run = run
     }
 }

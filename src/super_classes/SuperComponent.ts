@@ -1,11 +1,25 @@
 import { PermissionsString } from "discord.js"
-import { ISuperComponent, RunFunc } from "../interfaces/ISuperComponent"
+import { ISuperComponent, RunFunc, OnFailType, CpMiddlwaresType } from "../interfaces/ISuperComponent"
 
+
+const default_component_settings: Partial<ISuperComponent> = {
+    botPermissions: [],
+    userPermissions: [],
+    nsfw: false,
+    middlwares: [],
+    onBotPermissionsFail: () => { },
+    onUserPermissionsFail: () => { },
+    onDeveloperOnlyFail: () => { },
+    onCooldownFail: () => { },
+    onNsfwFail: () => { }, 
+    developerOnly: false,
+    cooldown: 0
+}
 
 export default class SuperComponent {
     settings: ISuperComponent
     constructor (options: ISuperComponent) {
-        this.settings = options
+        this.settings = { ...default_component_settings, ...options }
     }
     setId (id: string) {
         this.settings.id = id
@@ -24,6 +38,24 @@ export default class SuperComponent {
     }
     setDeveloperOnly (developerOnly: boolean) {
         this.settings.developerOnly = developerOnly
+    }
+    setOnUserPermissionsFail (onUserPermissionsFail: OnFailType) {
+        this.settings.onUserPermissionsFail = onUserPermissionsFail
+    }
+    setOnBotPermissionsFail (onBotPermissionsFail: OnFailType) {
+        this.settings.onBotPermissionsFail = onBotPermissionsFail
+    }
+    setOnDeveloperOnlyFail (onDeveloperOnlyFail: OnFailType) {
+        this.settings.onDeveloperOnlyFail = onDeveloperOnlyFail
+    }
+    setOnCooldownFail (onCooldownFail: OnFailType) {
+        this.settings.onCooldownFail = onCooldownFail
+    }
+    setOnNsfwFail (onNsfwFail: OnFailType) {
+        this.settings.onNsfwFail = onNsfwFail
+    }
+    setMiddlwares (middlwares: CpMiddlwaresType[]) {
+        this.settings.middlwares = middlwares
     }
     setRun (run: RunFunc) {
         this.settings.run = run

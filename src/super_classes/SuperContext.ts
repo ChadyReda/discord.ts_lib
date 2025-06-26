@@ -1,11 +1,26 @@
 import { ContextMenuCommandBuilder, PermissionsString } from "discord.js";
-import { ISuperContext, RunFunc } from "../interfaces/ISuperContext";
+import { ISuperContext, RunFunc, OnFailType, CxMiddlwaresType } from "../interfaces/ISuperContext";
+
+
+const default_context_settings: Partial<ISuperContext> = {
+    userPermissions: [],
+    botPermissions: [],
+    developerOnly: false,
+    cooldown: 0,
+    nsfw: false,
+    middlwares: [],
+    onUserPermissionsFail: () => { },
+    onBotPermissionsFail: () => { },
+    onDeveloperOnlyFail: () => { },
+    onCooldownFail: () => { },
+    onNsfwFail: () => { },
+}
 
 export default class SuperContext extends ContextMenuCommandBuilder {
     settings: ISuperContext
     constructor(options: ISuperContext) {
         super();
-        this.settings = options
+        this.settings = { ...default_context_settings, ...options }
     }
     setCommand(command: ContextMenuCommandBuilder) {
         this.settings.command = command
@@ -21,6 +36,27 @@ export default class SuperContext extends ContextMenuCommandBuilder {
     }
     setNsfw(nsfw: boolean) {
         this.settings.nsfw = nsfw
+    }
+    setCooldown(cooldown: number) {
+        this.settings.cooldown = cooldown
+    }
+    setOnUserPermissionsFail(onUserPermissionsFail: OnFailType) {
+        this.settings.onUserPermissionsFail = onUserPermissionsFail
+    }
+    setOnBotPermissionsFail(onBotPermissionsFail: OnFailType) {
+        this.settings.onBotPermissionsFail = onBotPermissionsFail
+    }
+    setOnDeveloperOnlyFail(onDeveloperOnlyFail: OnFailType) {
+        this.settings.onDeveloperOnlyFail = onDeveloperOnlyFail
+    }
+    setOnCooldownFail(onCooldownFail: OnFailType) {
+        this.settings.onCooldownFail = onCooldownFail
+    }
+    setOnNsfwFail(onNsfwFail: OnFailType) {
+        this.settings.onNsfwFail = onNsfwFail
+    }
+    setMiddlwares(middlwares: CxMiddlwaresType[]) {
+        this.settings.middlwares = middlwares
     }
     setRun(run: RunFunc) {
         this.settings.run = run

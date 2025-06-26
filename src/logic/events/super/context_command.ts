@@ -18,7 +18,7 @@ export default new SuperEvent ({
             const context_menu: SuperContext = client.registry.context_menus.message.get(interaction.commandName)!
             if (!context_menu) return;
 
-            if (context_menu.settings.cooldown > 0) {
+            if (context_menu.settings.cooldown! > 0) {
                 const key = `m${interaction.user.id}${interaction.commandName}`
                 const now = Date.now()
                 const expiration_time = client.registry.cooldowns.get(key)
@@ -30,11 +30,11 @@ export default new SuperEvent ({
                     }
                 }
 
-                client.registry.cooldowns.set(key, now + context_menu.settings.cooldown)
+                client.registry.cooldowns.set(key, now + context_menu.settings.cooldown!)
                 setTimeout(() => client.registry.cooldowns.delete(key), context_menu.settings.cooldown)
             }
             
-            for (const per of context_menu.settings.botPermissions) {
+            for (const per of context_menu.settings.botPermissions!) {
                 if (!interaction.guild.members.me?.permissions.has(per)) {
                     if (interaction.isRepliable()) {
                         interaction.reply(`i need the \`${per}\` permission to execute this command.`)
@@ -43,7 +43,7 @@ export default new SuperEvent ({
                 }
             }
             
-            for (const per of context_menu.settings.userPermissions) {
+            for (const per of context_menu.settings.userPermissions!) {
                 if (!(interaction.member?.permissions as PermissionsBitField).has(per)) {
                     if (interaction.isRepliable()) {
                         interaction.reply(`i need the \`${per}\` permission to execute this command.`);
@@ -76,7 +76,7 @@ export default new SuperEvent ({
             const context_menu: SuperContext = client.registry.context_menus.user.get(interaction.commandName)!
             if (!context_menu) return;
 
-            if (context_menu.settings.cooldown > 0) {
+            if (context_menu.settings.cooldown! > 0) {
                 const key = `u${interaction.user.id}${interaction.commandName}`
                 const now = Date.now()
                 const expiration_time = client.registry.cooldowns.get(key)
@@ -87,11 +87,11 @@ export default new SuperEvent ({
                         return
                     }
                 }
-                client.registry.cooldowns.set(key, now + context_menu.settings.cooldown)
+                client.registry.cooldowns.set(key, now + context_menu.settings.cooldown!)
                 setTimeout(() => client.registry.cooldowns.delete(key), context_menu.settings.cooldown)
             }
 
-            for (const per of context_menu.settings.botPermissions) {
+            for (const per of context_menu.settings.botPermissions!) {
                 if (!interaction.guild.members.me?.permissions.has(per)) {
                     if (interaction.isRepliable()) {
                         interaction.reply(`i need the \`${per}\` permission to execute this command.`)
@@ -100,7 +100,7 @@ export default new SuperEvent ({
                 }
             }
             
-            for (const per of context_menu.settings.userPermissions) {
+            for (const per of context_menu.settings.userPermissions!) {
                 if (!(interaction.member?.permissions as PermissionsBitField).has(per)) {
                     if (interaction.isRepliable()) {
                         interaction.reply(`i need the \`${per}\` permission to execute this command.`);

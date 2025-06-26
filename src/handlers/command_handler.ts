@@ -16,11 +16,11 @@ export default async function (client: SuperClient) {
                     client.commandsToRegister.push(command.settings.command)
                 }else if (type == 'prefix') {
                     if (!(command instanceof SuperMessageCommand)) continue;
-                    console.log(`Loaded prefix command *${command.settings.name}* - ${command.settings.aliases.join(', ')}`)
+                    console.log(`Loaded prefix command *${command.settings.name}* - ${command.settings.aliases?.join(', ')}`)
                     client.registry.registerPrefix(command.settings.name, command, command.settings.aliases)
                 }else if (type == 'nonprefix') {
                     if (!(command instanceof SuperMessageCommand)) continue;
-                    console.log(`Loaded non-prefix command *${command.settings.name}* - ${command.settings.aliases.join(', ')}`)
+                    console.log(`Loaded non-prefix command *${command.settings.name}* - ${command.settings.aliases?.join(', ')}`)
                     client.registry.registerNonPrefix(command.settings.name, command, command.settings.aliases)
                 }
             }

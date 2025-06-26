@@ -6,11 +6,6 @@ export default new SuperContext(
     {
         command: new ContextMenuCommandBuilder()
         .setName('delete'),
-        botPermissions: [],
-        userPermissions: [],
-        cooldown: 0,
-        developerOnly: false,
-        nsfw: true,
         run: async (client: SuperClient, interaction: ContextMenuCommandInteraction) => {
             await interaction.reply('hheee message cannot be deleted')
         }        

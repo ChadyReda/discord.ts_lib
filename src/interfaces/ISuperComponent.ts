@@ -1,16 +1,8 @@
 import { AnySelectMenuInteraction, ButtonInteraction, ModalSubmitInteraction, PermissionsString } from "discord.js";
 import SuperClient from "../super_classes/SuperClient";
 
-interface ISuperComponent {
-    id: string, 
-    cooldown: number, 
-    botPermissions: PermissionsString[],
-    userPermissions: PermissionsString[],
-    nsfw: boolean,
-    developerOnly: boolean,
-    run: RunFunc
-}
 
+type CpMiddlwaresType = (client: SuperClient, interaction: ComponentInteraction) => any
 type ComponentInteraction =
   | ButtonInteraction
   | AnySelectMenuInteraction
@@ -18,10 +10,30 @@ type ComponentInteraction =
 
 
 type RunFunc = (client: SuperClient, interaction: ComponentInteraction) => Promise<any> | any
+type OnFailType = (client: SuperClient, interaction: ComponentInteraction) => any
+
+interface ISuperComponent {
+    id: string, 
+    cooldown?: number, 
+    botPermissions?: PermissionsString[],
+    userPermissions?: PermissionsString[],
+    nsfw?: boolean,
+    developerOnly?: boolean,
+    onUserPermissionsFail?: OnFailType
+    onBotPermissionsFail?: OnFailType
+    onDeveloperOnlyFail?: OnFailType
+    onCooldownFail?: OnFailType
+    onNsfwFail?: OnFailType
+    middlwares?: CpMiddlwaresType[]
+    run: RunFunc
+}
+
 
 
 export {
-    ISuperComponent,
-    RunFunc,
-    ComponentInteraction
+  ISuperComponent,
+  RunFunc,
+  ComponentInteraction,
+  OnFailType,
+  CpMiddlwaresType
 }
