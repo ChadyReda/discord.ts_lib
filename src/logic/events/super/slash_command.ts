@@ -2,6 +2,8 @@ import { ChatInputCommandInteraction, PermissionsBitField, ChannelType } from "d
 import SuperClient from "../../../super_classes/SuperClient";
 import { SuperEvent } from "../../../super_classes/SuperEvent";
 import { SuperSlashCommand } from "../../../super_classes/SuperCommand";
+import { MiddlewareType } from "../../../interfaces/IMiddleware";
+
 
 export default new SuperEvent(
     {
@@ -22,6 +24,9 @@ export default new SuperEvent(
 
             // return if the command doesn't exist
             if (!command) return;
+
+            await client.registry.middlewareRunner.execute(client, MiddlewareType.GLOBAL, interaction);
+            await client.registry.middlewareRunner.execute(client, MiddlewareType.SLASH, interaction);
 
             // check for the cooldown
             if (command.settings.cooldown! > 0) {
@@ -78,10 +83,12 @@ export default new SuperEvent(
                 return
             }
 
-            command.settings.run(client, interaction).catch((err: any) => {
-                console.log("An error occured while executing the command: ", command.settings.command.name);
-                console.log(err.message);
-            })
+            try {
+                command.settings.run(client, interaction)
+            } catch (err: any) {
+                throw new Error(`An error occured while executing the command: ${command.settings.command.name}, ${err.message}`);
+            }
+
         },
     }
 )

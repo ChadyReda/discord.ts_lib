@@ -2,7 +2,7 @@ import SuperContext from "../../../super_classes/SuperContext";
 import SuperClient from "../../../super_classes/SuperClient";
 import { ChannelType, ContextMenuCommandInteraction, PermissionsBitField } from 'discord.js'
 import { SuperEvent } from "../../../super_classes/SuperEvent";
-
+import { MiddlewareType } from "../../../interfaces/IMiddleware";
 
 export default new SuperEvent ({
     event: 'interactionCreate',
@@ -12,6 +12,11 @@ export default new SuperEvent ({
         if (!interaction.guild) return
 
         if (!interaction.isCommand()) return
+
+        if (interaction.isContextMenuCommand()) {
+            await client.registry.middlewareRunner.execute(client, MiddlewareType.GLOBAL, interaction);
+            await client.registry.middlewareRunner.execute(client, MiddlewareType.CONTEXT, interaction);
+        }
 
         if (interaction.isMessageContextMenuCommand()) {
 
@@ -125,9 +130,11 @@ export default new SuperEvent ({
                 return
             }
 
-            context_menu.settings.run(client, interaction).catch((err: any) => {
+            try {
+                context_menu.settings.run(client, interaction)
+            } catch (err: any) {
                 console.log(`Error executing message command ${context_menu.settings.command.name}: ${err.message}`)
-            })
+            }
         }   
     }
 })

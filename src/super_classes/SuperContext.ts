@@ -1,5 +1,5 @@
 import { ContextMenuCommandBuilder, PermissionsString } from "discord.js";
-import { ISuperContext, RunFunc, OnFailType, CxMiddlwaresType } from "../interfaces/ISuperContext";
+import { ISuperContext, RunFunc, OnFailType } from "../interfaces/ISuperContext";
 
 
 const default_context_settings: Partial<ISuperContext> = {
@@ -8,7 +8,6 @@ const default_context_settings: Partial<ISuperContext> = {
     developerOnly: false,
     cooldown: 0,
     nsfw: false,
-    middlwares: [],
     onUserPermissionsFail: () => { },
     onBotPermissionsFail: () => { },
     onDeveloperOnlyFail: () => { },
@@ -54,9 +53,6 @@ export default class SuperContext extends ContextMenuCommandBuilder {
     }
     setOnNsfwFail(onNsfwFail: OnFailType) {
         this.settings.onNsfwFail = onNsfwFail
-    }
-    setMiddlwares(middlwares: CxMiddlwaresType[]) {
-        this.settings.middlwares = middlwares
     }
     setRun(run: RunFunc) {
         this.settings.run = run

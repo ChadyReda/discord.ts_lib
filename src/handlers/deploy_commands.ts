@@ -17,7 +17,6 @@ export default async function (client: SuperClient) {
         }).then(_ => {
             console.log(`Successfully reloaded ${client.commandsToRegister.length} application (/) commands to guild ${guildId}.`)
         }).catch((e: any) => {
-            console.log(`Unable to reload ${client.commandsToRegister.length} application (/) commands to guild ${guildId}.`, e.message)
             throw new Error(`Unable to reload ${client.commandsToRegister.length} application (/) commands to guild ${guildId}, ${e.message}`)
         })
     } else {
@@ -26,7 +25,6 @@ export default async function (client: SuperClient) {
         }).then(_ => {
             console.log(`Successfully reloaded ${client.commandsToRegister.length} application (/) commands.`)
         }).catch((e: any) => {
-            console.log(`Unable to reload ${client.commandsToRegister.length} global application (/) commands.`, e.message)
             throw new Error(`Unable to reload ${client.commandsToRegister.length} global application (/) commands, ${e.message}`)
         })
     }

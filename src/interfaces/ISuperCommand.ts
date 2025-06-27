@@ -3,8 +3,6 @@ import SuperClient from "../super_classes/SuperClient";
 
 type RunSlashFunc = (client: SuperClient, interaction: ChatInputCommandInteraction) => Promise<void> | any;
 type RunMessageFunc = (client: SuperClient, message: Message & {channel: TextChannel}, args: any[]) => any;
-type SMiddlwaresType = (client: SuperClient, interaction: ChatInputCommandInteraction, args: any[]) => any;
-type MMiddlwaresType = (client: SuperClient, message: Message & {channel: TextChannel}, args: any[]) => any;
 type OnSFailType = (client: SuperClient, interaction: ChatInputCommandInteraction) => any
 type OnMFailType = (client: SuperClient, message: Message & {channel: TextChannel}) => any
 
@@ -16,7 +14,6 @@ interface ISuperSlashCommand {
     onBotPermissionsFail?: OnSFailType,
     onDeveloperOnlyFail?: OnSFailType,
     onCooldownFail?: OnSFailType,
-    middlwares?: SMiddlwaresType[],
     developerOnly?: boolean,
     cooldown?: number,
     run: RunSlashFunc
@@ -32,7 +29,6 @@ interface ISuperMessageCommand {
     onCooldownFail?: OnMFailType,
     onNsfwFail?: OnMFailType,
     aliases?: string[],
-    middlwares?: MMiddlwaresType[],
     nsfw?: boolean
     developerOnly?: boolean,
     cooldown?: number,
@@ -44,8 +40,6 @@ export {
     ISuperMessageCommand,
     RunSlashFunc,
     RunMessageFunc,
-    SMiddlwaresType,
-    MMiddlwaresType,
     OnSFailType,
     OnMFailType
 }

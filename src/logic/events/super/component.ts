@@ -3,12 +3,14 @@ import SuperClient from "../../../super_classes/SuperClient";
 import { ComponentInteraction } from "../../../interfaces/ISuperComponent";
 import { SuperEvent } from "../../../super_classes/SuperEvent";
 import { ChannelType, PermissionsBitField } from "discord.js";
+import { MiddlewareType } from "../../../interfaces/IMiddleware";
 
 
 export default new SuperEvent({
     event: 'interactionCreate',
     once: false,
     run: async (client: SuperClient, interaction: ComponentInteraction) => {
+        
         if (!interaction.guild) return
 
         let component: SuperComponent | null = null
@@ -31,6 +33,8 @@ export default new SuperEvent({
 
         if (!component) return
 
+        await client.registry.middlewareRunner.execute(client, MiddlewareType.GLOBAL, interaction);
+        await client.registry.middlewareRunner.execute(client, MiddlewareType.COMPONENT, interaction);
 
         if (component.settings.cooldown! > 0) {
             const key = `${type}${interaction.user.id}${component.settings.id}`

@@ -24,7 +24,6 @@ interface ISuperComponent {
     onDeveloperOnlyFail?: OnFailType
     onCooldownFail?: OnFailType
     onNsfwFail?: OnFailType
-    middlwares?: CpMiddlwaresType[]
     run: RunFunc
 }
 
@@ -35,5 +34,4 @@ export {
   RunFunc,
   ComponentInteraction,
   OnFailType,
-  CpMiddlwaresType
 }

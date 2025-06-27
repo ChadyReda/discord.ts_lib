@@ -1,6 +1,7 @@
 import SuperClient from "../super_classes/SuperClient";
 import {readdirSync} from 'fs'
 import { SuperEvent} from "../super_classes/SuperEvent";
+import { MiddlewareType } from "../interfaces/IMiddleware";
 
 export default async function (client: SuperClient) {
     for (const dir of readdirSync(`./src/logic/events`)) {
@@ -11,9 +12,9 @@ export default async function (client: SuperClient) {
             if (!(event instanceof SuperEvent)) continue;
             console.log(`Loaded event: ${event.settings.event}`)
             if (event.settings.once) {
-                client.once(event.settings.event, (...args) => event.settings.run(client, ...args))
+                client.once(event.settings.event, (...args: any[]) => event.settings.run(client, ...args))
             }else {
-                client.on(event.settings.event, (...args) => event.settings.run(client, ...args))
+                client.on(event.settings.event, (...args: any[]) => event.settings.run(client, ...args))
             }
         }
     }

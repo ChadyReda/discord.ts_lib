@@ -1,3 +1,4 @@
+import { MiddlewareType } from "../../../interfaces/IMiddleware";
 import SuperClient from "../../../super_classes/SuperClient";
 import { SuperMessageCommand } from "../../../super_classes/SuperCommand";
 import { SuperEvent } from "../../../super_classes/SuperEvent";
@@ -28,6 +29,10 @@ export default new SuperEvent({
         }
         
         if (!command) return
+
+        await client.registry.middlewareRunner.execute(client, MiddlewareType.GLOBAL, message);
+        await client.registry.middlewareRunner.execute(client, MiddlewareType.MESSAGE, message);
+
 
         if (command.settings.cooldown! > 0) {
             const key = `p${message.author.id}${command_label}`
@@ -68,9 +73,11 @@ export default new SuperEvent({
             return
         }
 
-        command.settings.run(client, message as any, args).catch((err: any) => {
+        try {
+            command.settings.run(client, message as any, args)
+        } catch (err: any) {
             console.log(`Error executing message command ${command.settings.name}: ${err.message}`)
-        })
+        }
 
     }
 })  

@@ -4,7 +4,9 @@ import command_handler from "../handlers/command_handler";
 import event_handler from "../handlers/event_handler";
 import context_handler from "../handlers/context_handler";
 import component_handler from "../handlers/component_handle";
+import middlewares_handler from "../handlers/middlewares_handler";
 import deploy_commands from "../handlers/deploy_commands";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -42,6 +44,7 @@ export default class SuperClient extends Client {
             await event_handler(this);
             await context_handler(this);
             await component_handler(this);
+            await middlewares_handler(this);
             await deploy_commands(this);
             await this.login(Token);
         } catch (err: any) {

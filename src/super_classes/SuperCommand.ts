@@ -1,10 +1,9 @@
 import { SlashCommandBuilder, PermissionsString } from "discord.js";
-import { ISuperSlashCommand, ISuperMessageCommand, RunSlashFunc, RunMessageFunc, OnSFailType, OnMFailType, SMiddlwaresType, MMiddlwaresType } from "../interfaces/ISuperCommand";
+import { ISuperSlashCommand, ISuperMessageCommand, RunSlashFunc, RunMessageFunc, OnSFailType, OnMFailType } from "../interfaces/ISuperCommand";
 
 const default_slashcommand_settings: Partial<ISuperSlashCommand> = {
     botPermissions: [],
     userPermissions: [],
-    middlwares: [],
     developerOnly: false,
     cooldown: 0,
     onBotPermissionsFail: () => { },
@@ -17,7 +16,6 @@ const default_messagecommand_settings: Partial<ISuperMessageCommand> = {
     userPermissions: [],
     botPermissions: [],
     aliases: [],
-    middlwares: [],
     nsfw: false,
     developerOnly: false,
     cooldown: 0,
@@ -55,9 +53,6 @@ export class SuperSlashCommand extends SlashCommandBuilder {
     }
     setOnCooldownFail(onCooldownFail: OnSFailType) {
         this.settings.onCooldownFail = onCooldownFail
-    }
-    setMiddlwares(middlwares: SMiddlwaresType[]) {
-        this.settings.middlwares = middlwares
     }
     setCooldown(cooldown: number) {
         this.settings.cooldown = cooldown
@@ -107,9 +102,6 @@ export class SuperMessageCommand {
     }
     setOnNsfwFail(onNsfwFail: OnMFailType) {
         this.settings.onNsfwFail = onNsfwFail
-    }
-    setMiddlwares(middlwares: MMiddlwaresType[]) {
-        this.settings.middlwares = middlwares
     }
     setRun(run: RunMessageFunc) {
         this.settings.run = run

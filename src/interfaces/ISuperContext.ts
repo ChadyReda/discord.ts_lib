@@ -17,13 +17,11 @@ interface ISuperContext {
     onDeveloperOnlyFail?: OnFailType
     onCooldownFail?: OnFailType
     onNsfwFail?: OnFailType
-    middlwares?: CxMiddlwaresType[] 
     run: RunFunc
 }
 
 export {
     ISuperContext,
     RunFunc,
-    OnFailType,
-    CxMiddlwaresType
+    OnFailType
 }

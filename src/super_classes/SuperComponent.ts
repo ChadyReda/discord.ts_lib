@@ -1,12 +1,11 @@
 import { PermissionsString } from "discord.js"
-import { ISuperComponent, RunFunc, OnFailType, CpMiddlwaresType } from "../interfaces/ISuperComponent"
+import { ISuperComponent, RunFunc, OnFailType } from "../interfaces/ISuperComponent"
 
 
 const default_component_settings: Partial<ISuperComponent> = {
     botPermissions: [],
     userPermissions: [],
     nsfw: false,
-    middlwares: [],
     onBotPermissionsFail: () => { },
     onUserPermissionsFail: () => { },
     onDeveloperOnlyFail: () => { },
@@ -53,9 +52,6 @@ export default class SuperComponent {
     }
     setOnNsfwFail (onNsfwFail: OnFailType) {
         this.settings.onNsfwFail = onNsfwFail
-    }
-    setMiddlwares (middlwares: CpMiddlwaresType[]) {
-        this.settings.middlwares = middlwares
     }
     setRun (run: RunFunc) {
         this.settings.run = run
