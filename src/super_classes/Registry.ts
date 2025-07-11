@@ -1,10 +1,10 @@
-import { SuperMessageCommand, SuperSlashCommand} from "./SuperCommand"
-import SuperComponent from "./SuperComponent"
-import SuperContext from "./SuperContext"
-import {MiddlewareRunner} from "./MiddlewareRunner";
+import { SuperMessageCommand, SuperSlashCommand} from "./SuperCommand.js"
+import {SuperComponent} from "./SuperComponent.js"
+import {SuperContext} from "./SuperContext.js"
+import {MiddlewareRunner} from "./MiddlewareRunner.js";
+
 
 export default class Registry {
-    prefix: string = '!';
     slash_commands = new Map<string, SuperSlashCommand>()
     prefix_commands = new Map<string, SuperMessageCommand>()
     prefix_aliases = new Map<string, string>()

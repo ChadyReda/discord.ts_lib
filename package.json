@@ -1,24 +1,31 @@
 {
   "name": "discord.ts",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/index.js",
-    "build": "tsc",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "ts-node --project tsconfig.json -r tsconfig-paths/register src/index.ts",
+    "build": "tsc --outDir ./dist && tsc-alias",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "chady.dev",
+  "license": "MIT",
+  "description": "a discord js wrapper to make life easy",
   "devDependencies": {
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "discord.js": "^14.20.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "tsconfig-paths": "^4.2.0"
   }
 }

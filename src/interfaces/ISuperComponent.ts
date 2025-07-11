@@ -1,5 +1,5 @@
 import { AnySelectMenuInteraction, ButtonInteraction, ModalSubmitInteraction, PermissionsString } from "discord.js";
-import SuperClient from "../super_classes/SuperClient";
+import SuperClient from "@/super_classes/SuperClient.js";
 
 
 type CpMiddlwaresType = (client: SuperClient, interaction: ComponentInteraction) => any
@@ -10,7 +10,7 @@ type ComponentInteraction =
 
 
 type RunFunc = (client: SuperClient, interaction: ComponentInteraction) => Promise<any> | any
-type OnFailType = (client: SuperClient, interaction: ComponentInteraction) => any
+type OnFailType = (client: SuperClient, interaction: ComponentInteraction, ...any: any[]) => any
 
 interface ISuperComponent {
     id: string, 

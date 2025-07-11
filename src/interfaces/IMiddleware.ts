@@ -1,5 +1,5 @@
-import { MiddlewareControl } from "../super_classes/MiddlewareRunner"
-import SuperClient from "../super_classes/SuperClient"
+import { MiddlewareControl } from "@/super_classes/MiddlewareRunner.js"
+import SuperClient from "@/super_classes/SuperClient.js"
 
 enum MiddlewareType {
     GLOBAL = 'global',

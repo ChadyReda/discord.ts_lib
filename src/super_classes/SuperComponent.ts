@@ -1,5 +1,5 @@
 import { PermissionsString } from "discord.js"
-import { ISuperComponent, RunFunc, OnFailType } from "../interfaces/ISuperComponent"
+import { ISuperComponent, RunFunc, OnFailType } from "../interfaces/ISuperComponent.js"
 
 
 const default_component_settings: Partial<ISuperComponent> = {
@@ -15,7 +15,7 @@ const default_component_settings: Partial<ISuperComponent> = {
     cooldown: 0
 }
 
-export default class SuperComponent {
+export class SuperComponent {
     settings: ISuperComponent
     constructor (options: ISuperComponent) {
         this.settings = { ...default_component_settings, ...options }

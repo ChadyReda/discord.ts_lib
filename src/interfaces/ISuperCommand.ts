@@ -1,10 +1,10 @@
 import { Message, TextChannel, PermissionsString, SlashCommandBuilder, ChatInputCommandInteraction } from "discord.js";
-import SuperClient from "../super_classes/SuperClient";
+import SuperClient from "@/super_classes/SuperClient.js";
 
 type RunSlashFunc = (client: SuperClient, interaction: ChatInputCommandInteraction) => Promise<void> | any;
 type RunMessageFunc = (client: SuperClient, message: Message & {channel: TextChannel}, args: any[]) => any;
-type OnSFailType = (client: SuperClient, interaction: ChatInputCommandInteraction) => any
-type OnMFailType = (client: SuperClient, message: Message & {channel: TextChannel}) => any
+type OnSFailType = (client: SuperClient, interaction: ChatInputCommandInteraction, ...args: any[]) => any
+type OnMFailType = (client: SuperClient, message: Message & {channel: TextChannel}, ...args: any[]) => any
 
 interface ISuperSlashCommand {
     command: SlashCommandBuilder,
@@ -14,6 +14,8 @@ interface ISuperSlashCommand {
     onBotPermissionsFail?: OnSFailType,
     onDeveloperOnlyFail?: OnSFailType,
     onCooldownFail?: OnSFailType,
+    onNsfwFail?: OnSFailType,
+    nsfw?: boolean
     developerOnly?: boolean,
     cooldown?: number,
     run: RunSlashFunc

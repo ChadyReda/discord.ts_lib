@@ -1,5 +1,5 @@
 import { ClientEvents } from "discord.js";
-import { RunFunc, ISuperEvent } from "../interfaces/ISuperEvent";
+import { RunFunc, ISuperEvent } from "../interfaces/ISuperEvent.js";
 
 export class SuperEvent {
     settings: ISuperEvent

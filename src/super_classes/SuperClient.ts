@@ -1,54 +1,83 @@
-import { Client, IntentsBitField, Partials, ActivityType, SlashCommandBuilder, ContextMenuCommandBuilder } from "discord.js";
-import Registry from "./Registry";
-import command_handler from "../handlers/command_handler";
-import event_handler from "../handlers/event_handler";
-import context_handler from "../handlers/context_handler";
-import component_handler from "../handlers/component_handle";
-import middlewares_handler from "../handlers/middlewares_handler";
-import deploy_commands from "../handlers/deploy_commands";
+import { Client, PresenceStatusData, Partials, ActivityType, GatewayIntentBits , SlashCommandBuilder, ContextMenuCommandBuilder } from "discord.js";
+import Registry from "./Registry.js";
+import super_handler from "@/handlers/super_handler.js";
 
-import dotenv from "dotenv";
-dotenv.config();
+
+interface IBotConfig {
+    token: string
+    prefix?: string
+    developers?: string[]
+    guild_id: string
+    client_id: string
+    dev_mode?: boolean
+    status?: PresenceStatusData
+    intents?: GatewayIntentBits[]
+    partials?: Partials[]
+    activity_name?: string,
+    activity_type?: ActivityType
+    location?: {
+        base?: string
+        commands?: string
+        components?: string
+        context_menus?: string
+        middlewares?: string
+        slash_commands?: string
+        database?: string
+        events?: string
+    }
+}
+
+const defaultBotConfig: Partial<IBotConfig> = {
+    prefix: '!',
+    developers: [],
+    dev_mode: true,
+    status: 'online',
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ],
+    partials: [
+        Partials.Channel,
+        Partials.Message
+    ],
+    activity_name: 'with discord.ts',
+    activity_type: ActivityType.Streaming,
+}
+
 
 export default class SuperClient extends Client {
+    
     commandsToRegister: SlashCommandBuilder[] & ContextMenuCommandBuilder[] = []
     registry = new Registry()
-    constructor () {
+    client_config: IBotConfig;
+    
+    constructor (config: IBotConfig) {
+        const clientconfig: IBotConfig = {...defaultBotConfig, ...config}
+
         super({
-            intents: [
-                IntentsBitField.Flags.Guilds,
-                IntentsBitField.Flags.GuildMessages,
-                IntentsBitField.Flags.MessageContent
-                // add more if needed
-            ],
-            partials: [
-                Partials.Channel,
-                Partials.Message
-                // add more if needed
-            ],
+            intents: clientconfig.intents!,
+            partials: clientconfig.partials!,
             presence: {
-                status: 'idle',
+                status: clientconfig.status!,
                 activities: [
                     {
-                        name: 'with discord.ts',
-                        type: ActivityType.Streaming
+                        name: clientconfig.activity_name!,
+                        type: clientconfig.activity_type!
                     }
                 ]
             }
         })
+
+        this.client_config = clientconfig
     }
-    async start (Token = process.env.TOKEN!) {
+
+    async start () {
         try {
-            if (!Token) throw new Error('No token provided');
-            await command_handler(this);
-            await event_handler(this);
-            await context_handler(this);
-            await component_handler(this);
-            await middlewares_handler(this);
-            await deploy_commands(this);
-            await this.login(Token);
+            await super_handler(this)
         } catch (err: any) {
             console.log(err.message)
+            throw new Error(`Unable to start the bot, ${err.message}`);
         }
     }
 }

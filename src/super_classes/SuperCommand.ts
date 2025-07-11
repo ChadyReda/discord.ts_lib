@@ -1,15 +1,12 @@
 import { SlashCommandBuilder, PermissionsString } from "discord.js";
-import { ISuperSlashCommand, ISuperMessageCommand, RunSlashFunc, RunMessageFunc, OnSFailType, OnMFailType } from "../interfaces/ISuperCommand";
+import { ISuperSlashCommand, ISuperMessageCommand, RunSlashFunc, RunMessageFunc, OnSFailType, OnMFailType } from "../interfaces/ISuperCommand.js";
 
 const default_slashcommand_settings: Partial<ISuperSlashCommand> = {
     botPermissions: [],
     userPermissions: [],
+    nsfw: false,
     developerOnly: false,
     cooldown: 0,
-    onBotPermissionsFail: () => { },
-    onUserPermissionsFail: () => { },
-    onDeveloperOnlyFail: () => { },
-    onCooldownFail: () => { }
 }
 
 const default_messagecommand_settings: Partial<ISuperMessageCommand> = {
@@ -19,11 +16,6 @@ const default_messagecommand_settings: Partial<ISuperMessageCommand> = {
     nsfw: false,
     developerOnly: false,
     cooldown: 0,
-    onBotPermissionsFail: () => { },
-    onUserPermissionsFail: () => { },
-    onDeveloperOnlyFail: () => { },
-    onCooldownFail: () => { },
-    onNsfwFail: () => { }, 
 }
 
 
@@ -32,6 +24,9 @@ export class SuperSlashCommand extends SlashCommandBuilder {
     constructor(options: ISuperSlashCommand) {
         super();
         this.settings = { ...default_slashcommand_settings, ...options }
+    }
+    setNsfw(nsfw: boolean) {
+        this.settings.nsfw = nsfw  
     }
     setBotPermissions(botPermissions: PermissionsString[]) {
         this.settings.botPermissions = botPermissions
@@ -56,6 +51,9 @@ export class SuperSlashCommand extends SlashCommandBuilder {
     }
     setCooldown(cooldown: number) {
         this.settings.cooldown = cooldown
+    }
+    setOnNsfwFail(onNsfwFail: OnSFailType) {
+        this.settings.onNsfwFail = onNsfwFail
     }
     setRun(run: RunSlashFunc) {
         this.settings.run = run

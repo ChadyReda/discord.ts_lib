@@ -1,9 +1,9 @@
 import { ContextMenuCommandBuilder, ContextMenuCommandInteraction, PermissionsString } from "discord.js";
-import SuperClient from "../super_classes/SuperClient";
+import SuperClient from "@/super_classes/SuperClient.js";
 
 type RunFunc = (client: SuperClient, interaction: ContextMenuCommandInteraction) => any
 type CxMiddlwaresType = (client: SuperClient, interaction: ContextMenuCommandBuilder) => any
-type OnFailType = (client: SuperClient, interaction: ContextMenuCommandInteraction) => any
+type OnFailType = (client: SuperClient, interaction: ContextMenuCommandInteraction, ...args: any[]) => any
 
 interface ISuperContext {
     command: ContextMenuCommandBuilder,

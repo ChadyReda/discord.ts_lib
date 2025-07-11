@@ -1,6 +1,6 @@
-import { ISuperMiddlware, MiddlewareRun, MiddlewareType } from "../interfaces/IMiddleware";
-import { MiddlewareControl } from "./MiddlewareRunner";
-import SuperClient from "./SuperClient";
+import { ISuperMiddlware, MiddlewareRun, MiddlewareType } from "../interfaces/IMiddleware.js";
+import { MiddlewareControl } from "./MiddlewareRunner.js";
+import SuperClient from "./SuperClient.js";
 
 export class SuperMiddleware {
     settings: ISuperMiddlware

@@ -1,5 +1,5 @@
 import { ContextMenuCommandBuilder, PermissionsString } from "discord.js";
-import { ISuperContext, RunFunc, OnFailType } from "../interfaces/ISuperContext";
+import { ISuperContext, RunFunc, OnFailType } from "../interfaces/ISuperContext.js";
 
 
 const default_context_settings: Partial<ISuperContext> = {
@@ -15,7 +15,7 @@ const default_context_settings: Partial<ISuperContext> = {
     onNsfwFail: () => { },
 }
 
-export default class SuperContext extends ContextMenuCommandBuilder {
+export class SuperContext extends ContextMenuCommandBuilder {
     settings: ISuperContext
     constructor(options: ISuperContext) {
         super();

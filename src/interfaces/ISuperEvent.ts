@@ -1,5 +1,5 @@
 import { ClientEvents } from "discord.js";
-import SuperClient from "../super_classes/SuperClient";
+import SuperClient from "@/super_classes/SuperClient.js";
 
 type RunFunc = (client: SuperClient, ...args: any[]) => Promise<void> | any;
 
