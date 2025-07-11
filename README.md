@@ -1,4 +1,4 @@
-[⚠️ Suspicious Content] # 🤖 Distone.ts 
+# 🤖 Distone.ts 
 
 [![npm version](https://img.shields.io/npm/v/distone.ts)](https://www.npmjs.com/package/distone.ts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
