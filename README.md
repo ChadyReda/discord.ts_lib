@@ -89,7 +89,7 @@ const __dirname = path.dirname(__filename)
 const client = new SuperClient({
     token: "YOUR_BOT_TOKEN",
     guild_id: "YOUR_GUILD_ID",
-    prefix: ".c"
+    prefix: ".c",
     client_id: "YOUR_CLIENT_ID",
     location: {
         base: __dirname,
