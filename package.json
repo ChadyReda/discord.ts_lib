@@ -1,5 +1,5 @@
 {
-  "name": "discord.ts",
+  "name": "distone.ts",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -16,8 +16,10 @@
   "keywords": [],
   "author": "chady.dev",
   "license": "MIT",
-  "description": "a discord js wrapper to make life easy",
+  "description": "create and build discord bots using the power off a object oriented structure",
   "devDependencies": {
+    "@types/node": "^24.0.13",
+    "commander": "^14.0.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
