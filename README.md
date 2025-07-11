@@ -39,22 +39,22 @@ src/
 ├── main.ts                  # Bot entry point
 ├── commands/                # Message commands (!hello)
 │   └── /slash/
-|          └── /type/
-|                └──sayHi.js
-|   └── /message/
-|          └── /type/
-|                └──help.js
+│          └── /type/
+│                └──sayHi.js
+│   └── /message/
+│          └── /type/
+│                └──help.js
 ├── events/                  # Discord events (on ready, etc.)
 │   └── /type/
-|         └──/ready.js
+│         └──/ready.js
 ├── components/              # UI components (buttons, modals, selects)
 │   └── type/
-|        └──/button.js
+│        └──/button.js
 ├── context_menus/           # User/Message context menus
 │   └── user/
-|        └──/Report.js
-|   └── message/
-|          └──/delete.js
+│        └──/Report.js
+│   └── message/
+│          └──/delete.js
 ├── middlewares/             # Global middlewares
 │   └── logMiddleware.js
 ```
