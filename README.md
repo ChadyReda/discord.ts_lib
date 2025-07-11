@@ -27,7 +27,7 @@ A scalable, fully customizable TypeScript-based framework for building modular, 
 ## 📦 Installation
 
 ```bash
-npm install your-discord-framework-name
+npm install distone.ts
 ```
 
 ## 📁 Project Structure example
